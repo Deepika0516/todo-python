@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Flask</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <script src="https://cdn.tailwindcss.com"> </script>
+</head>
+<body>
+    <div class="container max-w-xl mx-auto p-4">
+        <h1 class="text-xl font-bold pb-4">Todo App</h1>
+        <form class="w-full px-6 flex justify-between" action="/add" method="post">
+            <div class="flex flex-col w-2/3">
+                <label>Todo Title</label>
+                <input class="my-4 border-2 border-black py-2 px-2 rounded-xl" type="text" name="title" placeholder="Enter todo...." />
+            </div>  
+            <button class="self-end my-4 border border-black rounded-xl px-6 py-2 bg-blue-400" type="submit">Add</button>
+        </form>
+        {% for todo in todo_list %}
+        <div class="w-full px-6 flex justify-between pb-6">
+            <div>
+                <p>{{todo.id}}.</p>
+                <h1 class="text-xl">{{todo.title}}</h1>
+                {% if todo.complete == False %}
+                <span>Not complete</span>
+                {% else %}
+                <span>Completed</span>
+                {% endif %}
+            </div>
+            <a class="self-end border border-black rounded-xl px-6 py-2 bg-green-400" href="/update/{{todo.id}}">Update</a>
+            <a class="self-end border border-black rounded-xl px-6 py-2 bg-red-400" href="/delete/{{todo.id}}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
